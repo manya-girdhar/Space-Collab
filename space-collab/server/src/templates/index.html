@@ -1,0 +1,269 @@
+{% extends "outline.html" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='homepage.css')}}">
+{% endblock css %}
+
+{% block content %}
+  <div class="row">
+    <div class = "col-md-6 d-flex justify-content-start">
+      <img src="{{ url_for('static', filename='assets/asteroid.png')}}" alt="Asteroid" id="asteroid-1">
+      <!-- <img src="{{ url_for('static', filename='assets/asteroid.png')}}" alt="Asteroid" id="asteroid-2"> -->
+    </div>
+    <div class = "col-md-6 d-flex justify-content-end">
+      <img src="{{ url_for('static', filename='assets/comet.png')}}" alt="Asteroid" id="comet">
+      <img src="{{ url_for('static', filename='assets/sun.png')}}" alt="Sun" id="sun">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 d-flex justify-content-center orbit-container">
+      <img src="{{ url_for('static', filename='assets/earth.png')}}" alt="Earth" id="earth">
+      <img src="{{ url_for('static', filename='assets/moon.png')}}" alt="Moon" id="moon">
+    </div>
+  </div>
+
+  <div class="row">
+  <a class=" col-md-12 d-flex justify-content-center launch-link" href="#about_us">
+    <img src="{{ url_for('static', filename='assets/start.png')}}" id="launch_button">
+  </a>
+  </div>
+
+<!-- <div class="container blank-container"></div> -->
+
+  <div class = "row">
+    <div class="col-md-12 d-flex justify-content-start" id="about_us">
+      <h3> Encouraging Collaboration in the Space Industry </h3>
+    </div>
+    <div class="col-md-7 d-flex justify-content-start">
+      <p> Cooperation and collaboration are paramount to maintain a consistent pace of scientific discovery. <br>
+        We bring to you Space Collab, with an aim to unite countries, private organisations and individuals
+        to collaborate on space exploration projects. <br> <br>
+        ➣ Enter the Stage 1 of your mission by signing up today. <br>
+        ➣ Or explore ongoing projects by entering Stage 2. <br>
+      </p>
+    </div>
+    <div class="col-md-5 d-flex justify-content-center">
+      <img src="{{ url_for('static', filename='assets/since_2020.gif')}}" id="img-2020">
+    </div>
+    <div class="col-md-8 d-flex justify-content-left">
+    <a href="{{ url_for('signup') }}">
+      <img src="{{ url_for('static', filename='assets/stage_1.png')}}" id="stage-1">
+    </a>
+    <a href="#explore-section">
+      <img src="{{ url_for('static', filename='assets/stage_2.png')}}" id="stage-2">
+    </a>
+    </div>
+  </div>
+
+
+  <div class="row explore" id="explore-section">
+    <div class = "col-md-12 d-flex justify-content-center">
+      <img src="{{ url_for('static', filename='assets/explore.png')}}" alt="Explore" id="explore-tag">
+    </div>
+    <div class = "col-md-12 d-flex justify-content-center">
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <script>
+    // Code for the Google Maps API
+    var map;
+    // Function to implement a google map.
+    function initMap() {
+      var manchester_lat_lng = {lat: 36.726017, lng: 3.082667};
+      var map_options = {zoom: 2, center: manchester_lat_lng, disableDefaultUI: true};
+
+      // Ref (for styling): https://developers.google.com/maps/documentation/javascript/styling
+      var maps_style = [
+      {
+        "elementType": "geometry",
+        "stylers": [{"color": "#242F3E"}]
+      },
+      {
+        "elementType": "labels.text.fill",
+        "stylers": [{"color": "#9E917C"}]
+      },
+      {
+        "elementType": "labels.text.stroke",
+        "stylers": [{"color": "#242F3E"}]
+      },
+      {
+        "featureType": "administrative.country",
+        "elementType": "geometry.stroke",
+        "stylers": [{"color": "#008E8E"}]
+      },
+      {
+        "featureType": "administrative.country",
+        "elementType": "labels.text",
+        "stylers": [{"saturation": -10}]
+      },
+      {
+        "featureType": "administrative.country",
+        "elementType": "labels.text.fill",
+        "stylers": [{"color": "#00A8A8"}]
+      },
+      {
+        "featureType": "administrative.land_parcel",
+        "elementType": "labels",
+        "stylers": [{"visibility": "off"}]
+      },
+      {
+        "featureType": "administrative.locality",
+        "elementType": "labels.text.fill",
+        "stylers": [{"color": "#D3925C"}]
+      },
+      {
+        "featureType": "poi",
+        "elementType": "labels.text",
+        "stylers": [{"visibility": "off"}]
+      },
+      {
+        "featureType": "poi",
+        "elementType": "labels.text.fill",
+        "stylers": [{"color": "#D59563"}]
+      },
+      {
+        "featureType": "poi.business",
+        "stylers": [{"visibility": "off"}]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "geometry",
+        "stylers": [{"color": "#263C3F"}]
+      },
+      {
+        "featureType": "poi.park",
+        "elementType": "labels.text.fill",
+        "stylers": [{"color": "#6B9A76"}]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [{"color": "#38414E"}]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [{"color": "#212A37"}]
+      },
+      {
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [{"visibility": "off"}]
+      },
+      {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [{"color": "#9CA5B3"}]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [{"color": "#746855"}]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [{"color": "#1F2835"}]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "labels.text.fill",
+        "stylers": [{"color": "#F3D19C"}]
+      },
+      {
+        "featureType": "road.local",
+        "elementType": "labels",
+        "stylers": [{"visibility": "off"}]
+      },
+      {
+        "featureType": "transit",
+        "stylers": [{"visibility": "off"}]
+      },
+      {
+        "featureType": "transit",
+        "elementType": "geometry",
+        "stylers": [{"color": "#2F3948"}]
+      },
+      {
+        "featureType": "transit.station",
+        "elementType": "labels.text.fill",
+        "stylers": [{"color": "#D59563"}]
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [
+          {"color": "#17263C"}]
+      },
+      {
+        "featureType": "water",
+        "elementType": "labels.text.fill",
+        "stylers": [{"color": "#515C6D"}]
+      },
+      {
+        "featureType": "water",
+        "elementType": "labels.text.stroke",
+        "stylers": [{"color": "#17263C"}]
+      },
+    ];
+      // Creating a new map takes in two parameters: the map ID and the map_options
+      map = new google.maps.Map(document.getElementById('map'), map_options);
+      map.setOptions({styles: maps_style});
+
+
+    var icon = {
+        //Ref: <a href="https://icons8.com/icon/1Iw1563rY6Yj/atom-symbol">Atom Symbol icon by Icons8</a>
+        url: "https://img.icons8.com/emoji/48/000000/atom-symbol-emoji.png",
+        //url: "https://mts.googleapis.com/vt/icon/name=icons/spotlight/spotlight-waypoint-a.png&text=A&psize=16&font=fonts/Roboto-Regular.ttf&color=ff33333&ax=44&ay=48&scale=1",
+    };
+
+    geocoder = new google.maps.Geocoder();
+    function getCountry(title, project_status, theme, location, email) {
+      <!-- const address = document.getElementById("address").value; -->
+       geocoder.geocode( { 'address': location }, function(results, status) {
+           if (status == google.maps.GeocoderStatus.OK) {
+             // map.setCenter(results[0].geometry.location);
+               var marker = new google.maps.Marker({
+                  map: map,
+                  position: results[0].geometry.location,
+                  icon: icon,
+                  animation: google.maps.Animation.DROP,
+                  draggable: false,
+              });
+            var infoWindow = new google.maps.InfoWindow({
+                    content: '<h5>'+title+'</h5>'+
+                    '<h7>'+theme.fontcolor("blue")+'</h7>'+'<br>'+
+                    '<h8>'+project_status.fontcolor("green")+'</h8>'+'<br>'+
+                     '<a href=mailto:'+email+'><i class="fa fa-envelope"></i></a>'
+              });
+           marker.addListener('click', function() {
+             infoWindow.open(map, marker);
+           });
+           } else {
+             alert("Geocode was not successful for the following reason: " + status);
+           }
+       });
+    }
+
+    let projects = {{ global_projects|tojson }}
+    for (let project in projects) {
+      getCountry(projects[project].title,
+                 projects[project].status,
+                 projects[project].theme,
+                 projects[project].location,
+                 projects[project].email);
+    }
+  }
+
+  </script>
+
+
+  <!-- for Google maps API -->
+  <script async defer async="false" type="text/javascript"
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2EPkOLd2ybNvLbNr5JQuTMrSlUS1Y-ok&callback=initMap">
+  </script>
+  <!-- <script async defer async="false" type="text/javascript"
+  src=https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452&key=AIzaSyB2EPkOLd2ybNvLbNr5JQuTMrSlUS1Y-ok>
+</script> -->
+{% endblock content %}

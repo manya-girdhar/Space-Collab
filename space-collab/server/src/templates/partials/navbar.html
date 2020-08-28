@@ -1,0 +1,43 @@
+<nav class="navbar navbar-dark navbar-expand-sm sticky-top">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="{{ url_for('index') }}">
+        <img src="{{ url_for('static', filename='assets/logo.png') }}"
+        alt="Space Collab" width="80"/>
+      </a>
+    </div>
+  <div class="container-fluid">
+  <button class="navbar-toggler" data-target="#navbarToggle" aria-controls="navbarToggle"
+          type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarToggle">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('index') }}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('index') }}#about_us">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('index') }}#explore-section">Explore</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav">
+      {% if user %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('user_homepage') }}">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+      </li>
+      {% endif %}
+    </ul>
+</div>
+</nav>

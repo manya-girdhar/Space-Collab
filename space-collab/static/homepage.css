@@ -1,0 +1,172 @@
+html {
+  scroll-behavior: smooth;
+}
+
+h3{
+  font-family: 'Orbitron', sans-serif;
+  color: #f44ca2;
+  margin-top: 8.9%;
+  margin-bottom: 3%;
+}
+
+p{
+  font-family: 'MuseoModerno', cursive;
+  color: #5fcad8;
+  text-align: justify;
+  font-size: 20px;
+}
+
+.orbit-container{
+  max-height: 90%;
+  margin-top: -5%;
+  /* max-width: 100%; */
+}
+
+/* .launch-link{
+  max-height: 25%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+} */
+
+.blank-container {
+  margin: 20%;
+}
+
+.explore{
+  margin-bottom: 5%;
+}
+
+#comet{
+  position: absolute;
+  width:15%;
+  height: auto;
+  /* animation: comet-path1 3s linear 1;
+  animation-delay: 5s;
+  animation-fill-mode: forwards; */
+  top: 115%;
+  left: 74.5%;
+  transform: translate(-5.8%, -75%);
+}
+
+#asteroid-1{
+  height: auto;
+  width: 18%;
+  animation: fly-off-the-screen 5s ease 1;
+  animation-fill-mode: forwards;
+}
+
+#asteroid-2{
+  height: auto;
+  width: 18%;
+  animation: fly-off-the-screen 3s ease 1;
+  animation-fill-mode: forwards;
+}
+
+#sun{
+  max-width: 20%;
+  height: auto;
+  animation: rotate-sun 20s linear infinite;
+}
+
+#earth {
+    height: auto;
+    width: 25%;
+    transform-origin: 50% 50%;
+    animation-name: rotate;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+#moon{
+  position: absolute;
+  height: auto;
+  width: 8%;
+  animation: orbit 6s linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#launch_button{
+  width:15%;
+  margin-top: 6.5%;
+  margin-bottom: 4%;
+}
+
+/* #about_us{
+  height: 70%;
+  width: auto; */
+  /* display: inline-block; */
+  /* border: 3px solid green; */
+/* } */
+
+#img-2020{
+  width: 60%;
+  height: auto;
+  /* margin-left: 20%;
+  margin-top: 0px; */
+}
+
+#stage-1{
+  width:25%;
+  margin-bottom: 10%;
+}
+
+#stage-2{
+  width:25%;
+  margin-bottom: 10%;
+}
+
+#explore-tag{
+	height: auto;
+	width: 20%;
+  margin-top: 10%;
+}
+
+#map {
+	width: 80%;
+	height: 350px;
+  background-color: grey;
+  margin-top: 2%;
+}
+
+@keyframes rotate {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate-sun {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@keyframes fly-off-the-screen {
+    70% {
+      transform: translate3D(280%, 380%, 0);
+      }
+    100% {
+      transform: translate3D(-900%, -900%, 0);
+      }
+    }
+
+@keyframes orbit {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(172%);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg) translateX(172%);
+  }
+}
+
+/* @keyframes comet-path1{
+  from {
+    transform: translate(-50%, -20%) rotate(0deg) translateX(-70px);
+  }
+  to {
+    transform: translate(-20%, -20%) rotate(180deg) translateX(-70px);
+  }
+} */

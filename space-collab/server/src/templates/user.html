@@ -1,0 +1,137 @@
+{% extends "outline.html" %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='user.css')}}">
+{% endblock css %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-3 d-flex justify-content-start user_profile">
+    <div class="container-fluid">
+      <img src="{{ url_for('static', filename='assets/profile.png')}}" alt="Asteroid" id="default_profile">
+      <h3>{{ user.firstname }} {{ user.lastname }}</h3>
+      <h5>{{ user.location }}</h5>
+      <h5>{{ user.role }}</h5>
+      <p> <b>About Me:</b> <br>
+        {{ user.profile_description }}
+      </p>
+      <h7><i class="fa fa-envelope"></i><br>{{ user.email }} </h7>
+    </div>
+  </div>
+  <div class="col-md-7 d-flex justify-content-start">
+    <div class="container p-3 my-3 bg-dark text-white">
+    <!-- <div class="container-fluid"> -->
+      <div class="slide-wrap">
+        <div class="slide_icons d-flex justify-content-between">
+          <a href="#slide-1">Create New</a>
+          <a href="#slide-2">Existing projects</a>
+        </div>
+        <div class="slider">
+
+          <!-- Contents of slide 1 is the form -->
+          <div class="slide" id="slide-1">
+            <div class = "container-fluid project-form">
+              <form method="POST" action="" autocomplete="off">
+              {{ form.hidden_tag() }}  <!-- adds csrf token -->
+              <fieldset class="form-group">
+                  <div class="form-group">
+                      {{ form.project_title.label(class="form-control-label") }}
+                      {% if form.project_title.errors %}
+                          {{ form.project_title(class="form-control form-control-sm is-invalid") }}
+                          <div class="invalid-feedback">
+                              {% for error in form.project_title.errors %}
+                                  <span>{{ error }}</span>
+                              {% endfor %}
+                          </div>
+                      {% else %}
+                          {{ form.project_title(class="form-control form-control-sm") }}
+                      {% endif %}
+                  </div>
+                  <div class="form-group">
+                      {{ form.description.label(class="form-control-label") }}
+                      {% if form.description.errors %}
+                          {{ form.description(class="form-control form-control-sm is-invalid") }}
+                          <div class="invalid-feedback">
+                              {% for error in form.description.errors %}
+                                  <span>{{ error }}</span>
+                              {% endfor %}
+                          </div>
+                      {% else %}
+                          {{ form.description(class="form-control form-control-sm") }}
+                      {% endif %}
+                  </div>
+                  <div class="form-group">
+                      {{ form.status.label(class="form-control-label") }}
+                      {% if form.status.errors %}
+                          {{ form.status(class="form-control form-control-sm is-invalid") }}
+                          <div class="invalid-feedback">
+                              {% for error in form.status.errors %}
+                                  <span>{{ error }}</span>
+                              {% endfor %}
+                          </div>
+                      {% else %}
+                          {{ form.status(class="form-control form-control-sm") }}
+                      {% endif %}
+                  </div>
+                  <div class="form-group">
+                      {{ form.theme.label(class="form-control-label") }}
+                      {% if form.theme.errors %}
+                          {{ form.theme(class="form-control form-control-sm is-invalid") }}
+                          <div class="invalid-feedback">
+                              {% for error in form.theme.errors %}
+                                  <span>{{ error }}</span>
+                              {% endfor %}
+                          </div>
+                      {% else %}
+                          {{ form.theme(class="form-control form-control-sm") }}
+                      {% endif %}
+                  </div>
+                  <!-- <div class="form-group"> -->
+                  <input type="text" name="location" value={{user.location}} hidden>
+                  <input type="text" name="email" value={{user.email}} hidden>
+                  <!-- </div> -->
+                  <div class="form-group">
+                      {{ form.submit(class="btn btn-outline-info") }}
+                  </div>
+              </fieldset>
+              </form>
+            </div>
+          </div>
+          <!-- Contents of slide 2 is the list of projects -->
+          <div class="slide" id="slide-2">
+            {% for project in projects %}
+            <div class="container p-3 my-3 project-display">
+              <div class="row">
+                <div class = "col-md-4 d-flex justify-content-center">
+                  <div class = "container-fluid">
+                    <img src="{{ url_for('static', filename='assets/planet_1.png')}}" id="project-icon">
+                    <br>
+                    <h9> Theme: {{project.theme}} </h9>
+                  </div>
+                </div>
+                <div class = "col-md-8 d-flex justify-content-start">
+                  <div class = "container-fluid">
+                    <h4> {{project.title}} </h4>
+                    <h5> <p> {{project.description}} </h5>
+                    <h8> Status: {{project.status}} </h8>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 d-flex justify-content-end">
+    <div class="icon-bar">
+      <a class="active" href="#"><i class="fa fa-grav" ></i></a>
+      <a href="{{ url_for('index') }}#explore-section"><i class="fa fa-globe" ></i></a>
+      <a href="{{ url_for('gmail') }}"><i class="fa fa-envelope"></i></a>
+      <a href="#"><i class="fa fa-user-circle"></i></a>
+    </div>
+  </div>
+</div>
+{% endblock content %}
